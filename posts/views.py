@@ -9,8 +9,12 @@ from rest_framework.generics import (
 
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from django.shortcuts import render
+from django.shortcuts import render
 from .models import Author, Post
 from .serializers import PostSerializer
+
+def home(request):
+    return render(request, 'index.html')
 
 class PostListView(ListAPIView):
     permission_classes = (AllowAny, )
