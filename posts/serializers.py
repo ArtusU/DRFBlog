@@ -3,6 +3,7 @@ from .models import Author, Post
 
 
 class PostSerializer(serializers.ModelSerializer):
+    author = serializers.SerializerMethodField()
     class Meta:
         model = Post
         fields = (
@@ -11,5 +12,18 @@ class PostSerializer(serializers.ModelSerializer):
             'content',
             'publish_date',
             'updated',
+            'author'
+        )
+
+    def get_author(self, obj):
+        return obj.author.user.username
+
+
+class PostCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Post
+        fields = (
+            'title',
+            'content',
             'author'
         )
